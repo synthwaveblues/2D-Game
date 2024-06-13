@@ -8,6 +8,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var dodge_direction = 1;
 var spaces = 0
 var allowDodge = 0
+var temp = 0;
+var start_position = 0
 
 @onready var ray_cast_2d_right = $RayCast2DRight
 @onready var ray_cast_2d_left = $RayCast2DLeft
@@ -15,6 +17,11 @@ var allowDodge = 0
 func _ready():
 	ray_cast_2d_right.enabled = true
 	ray_cast_2d_left.enabled = true
+	start_position = position.x
+
+func _process(delta):
+	position.x += 5 * delta
+		
 
 func _physics_process(delta):
 	handle_gravity(delta)
@@ -46,9 +53,10 @@ func handle_jump(delta):
 
 func handle_dodge(delta):
 	if allowDodge == 1 and Input.is_action_just_pressed("jump"):
-		position.x += 50 * direction  # Dodge movement
-		spaces = 0  # Reset spaces after dodge
+		temp = 1
 		allowDodge = 0
+		spaces = 0  # Reset spaces after dodge
+		
 
 func handle_wall_interactions(delta):
 	if (ray_cast_2d_left.is_colliding() or ray_cast_2d_right.is_colliding()) and is_on_wall() and not is_on_floor():
