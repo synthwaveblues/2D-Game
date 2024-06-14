@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://cm4gjcgjg0uok"]
+
+[ext_resource type="PackedScene" uid="uid://ccujvq4tmdfl3" path="res://scenes/player.tscn" id="1_vl3gh"]
+[ext_resource type="PackedScene" uid="uid://c8xoavumvsga6" path="res://scenes/test_plaform.tscn" id="2_4jehj"]
+[ext_resource type="PackedScene" uid="uid://fbxpi6i2376e" path="res://scenes/right_wall.tscn" id="3_pydco"]
+[ext_resource type="PackedScene" uid="uid://cilcb4kint6ne" path="res://scenes/left_wall.tscn" id="4_s3fvw"]
+
+[node name="Game" type="Node2D"]
+position = Vector2(98, -109)
+
+[node name="Player" parent="." instance=ExtResource("1_vl3gh")]
+position = Vector2(-137, -53)
+collision_layer = 3
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-72.7273, 25.4545)
+scale = Vector2(1.81818, 1.81818)
+ignore_rotation = false
+zoom = Vector2(2.5, 2.5)
+position_smoothing_speed = 1.0
+rotation_smoothing_speed = 100.0
+
+[node name="StaticBody2D" parent="." instance=ExtResource("2_4jehj")]
+position = Vector2(8, 87)
+
+[node name="right_wall" parent="." instance=ExtResource("3_pydco")]
+position = Vector2(-252, -179)
+
+[node name="LeftWall" parent="." instance=ExtResource("4_s3fvw")]
+position = Vector2(-339, -104)

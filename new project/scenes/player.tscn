@@ -1,0 +1,152 @@
+[gd_scene load_steps=20 format=3 uid="uid://ccujvq4tmdfl3"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_v6fob"]
+[ext_resource type="Texture2D" uid="uid://ch4w6m18uapq5" path="res://assets/player.png" id="2_2e507"]
+[ext_resource type="Texture2D" uid="uid://lt1bns22etix" path="res://assets/player_movement.png" id="3_yh7oh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mifuq"]
+atlas = ExtResource("2_2e507")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qoc6q"]
+atlas = ExtResource("2_2e507")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4dcm6"]
+atlas = ExtResource("2_2e507")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhjrd"]
+atlas = ExtResource("2_2e507")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hk55w"]
+atlas = ExtResource("3_yh7oh")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ij8w"]
+atlas = ExtResource("3_yh7oh")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnshh"]
+atlas = ExtResource("3_yh7oh")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4u1ka"]
+atlas = ExtResource("3_yh7oh")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pptf2"]
+atlas = ExtResource("3_yh7oh")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjlyi"]
+atlas = ExtResource("3_yh7oh")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vcr1t"]
+atlas = ExtResource("3_yh7oh")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8g4bn"]
+atlas = ExtResource("3_yh7oh")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p43k8"]
+atlas = ExtResource("3_yh7oh")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74xmx"]
+atlas = ExtResource("3_yh7oh")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fdjd4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mifuq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qoc6q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4dcm6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhjrd")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hk55w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ij8w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnshh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4u1ka")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pptf2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjlyi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vcr1t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8g4bn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p43k8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74xmx")
+}],
+"loop": true,
+"name": &"running",
+"speed": 14.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p6upa"]
+size = Vector2(19, 55)
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(-881, -193)
+scale = Vector2(0.55, 0.55)
+collision_layer = 2
+script = ExtResource("1_v6fob")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 2
+position = Vector2(5.45455, 3.63636)
+sprite_frames = SubResource("SpriteFrames_fdjd4")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.5, 4)
+shape = SubResource("RectangleShape2D_p6upa")
+
+[node name="RayCast2DLeft" type="RayCast2D" parent="."]
+position = Vector2(1, 0)
+target_position = Vector2(-15.5454, 0)
+
+[node name="RayCast2DRight" type="RayCast2D" parent="."]
+target_position = Vector2(16.3636, 0)
+
+[node name="dash_timer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="can_dash_timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="dash_timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="can_dash_timer" to="." method="_on_can_dash_timeout"]
+[connection signal="timeout" from="can_dash_timer" to="." method="_on_timer_timeout"]

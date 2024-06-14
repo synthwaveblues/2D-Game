@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://fbxpi6i2376e"]
+
+[ext_resource type="Texture2D" uid="uid://dcdara0yemlk7" path="res://assets/black_noun_002_03536.jpg" id="1_0ehx6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bslcm"]
+size = Vector2(20, 383.5)
+
+[node name="right_wall" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.90735e-06, 0)
+shape = SubResource("RectangleShape2D_bslcm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.90735e-06, 0)
+scale = Vector2(0.1, 1.915)
+texture = ExtResource("1_0ehx6")
