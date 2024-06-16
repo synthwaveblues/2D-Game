@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://cm4gjcgjg0uok"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_3dwsf"]
+[ext_resource type="PackedScene" uid="uid://ccujvq4tmdfl3" path="res://scenes/player.tscn" id="1_vl3gh"]
+[ext_resource type="PackedScene" uid="uid://c8xoavumvsga6" path="res://scenes/test_plaform.tscn" id="2_4jehj"]
+[ext_resource type="PackedScene" uid="uid://fbxpi6i2376e" path="res://scenes/right_wall.tscn" id="3_pydco"]
+[ext_resource type="PackedScene" uid="uid://cilcb4kint6ne" path="res://scenes/left_wall.tscn" id="4_s3fvw"]
+[ext_resource type="PackedScene" uid="uid://bphisthtumkrr" path="res://scenes/killzone.tscn" id="5_drcvl"]
+[ext_resource type="PackedScene" uid="uid://ckqme6vb61uh2" path="res://scenes/health_bar.tscn" id="7_qclxi"]
+
+[node name="Game" type="Node2D"]
+position = Vector2(98, -109)
+script = ExtResource("1_3dwsf")
+
+[node name="Player" parent="." instance=ExtResource("1_vl3gh")]
+position = Vector2(178, 37)
+collision_layer = 3
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-72.7273, 25.4545)
+scale = Vector2(1.81818, 1.81818)
+ignore_rotation = false
+zoom = Vector2(2.5, 2.5)
+position_smoothing_speed = 10.0
+rotation_smoothing_speed = 100.0
+
+[node name="HealthBar" parent="Player/Camera2D" instance=ExtResource("7_qclxi")]
+z_index = 3
+offset_left = -224.0
+offset_top = -118.0
+offset_right = -38.0002
+offset_bottom = -109.0
+metadata/_edit_use_anchors_ = true
+
+[node name="StaticBody2D" parent="." instance=ExtResource("2_4jehj")]
+position = Vector2(8, 87)
+
+[node name="right_wall" parent="." instance=ExtResource("3_pydco")]
+position = Vector2(-252, -179)
+
+[node name="LeftWall" parent="." instance=ExtResource("4_s3fvw")]
+position = Vector2(-339, -104)
+
+[node name="StaticBody2D2" parent="." instance=ExtResource("2_4jehj")]
+position = Vector2(-574, -294)
+
+[node name="StaticBody2D3" parent="." instance=ExtResource("2_4jehj")]
+position = Vector2(178, -10)
+
+[node name="StaticBody2D4" parent="." instance=ExtResource("2_4jehj")]
+position = Vector2(401, -87)
+
+[node name="StaticBody2D5" parent="." instance=ExtResource("2_4jehj")]
+position = Vector2(646, 87)
+
+[node name="right_wall2" parent="." instance=ExtResource("3_pydco")]
+position = Vector2(1127, -137)
+
+[node name="Killzone" parent="." instance=ExtResource("5_drcvl")]
+position = Vector2(251, 97)
